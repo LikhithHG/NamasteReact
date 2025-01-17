@@ -87,14 +87,14 @@ const Body = () => {
         <Shimmer />
     ) : (
         <div className='body'>
-            <div className='filter'>
-                <div className='search m-4 '>
+            <div className='filter flex'>
+                <div className='search m-4 p-4 flex items-center'>
                     <input type="text" 
                         className="border border-solid border-black" 
                         value = {searchText} 
                         onChange={(e) => {setSearchText(e.target.value) }}
                     />
-                    <button className="search-btn "
+                    <button className="search-btn p-4 bg-green-100 px-3 py-1 m-4 rounded-lg"
                         onClick={() => {
                             //Filter the restaurant cards and update the UI.
                             //Search text from Input box I need to take the value from input box and bind to local state variable
@@ -113,25 +113,28 @@ const Body = () => {
                     </button>
 
                 </div>
-                <button 
-                    className='filter-btn' //OnClick takes the callback function
-                    onClick={() => {
-                            //Filter logic here
-                            //We use the hooks
-                            //Always filter from original list of restaurants
-                            const filteredList = restaurants.filter(
-                                (item) => item.info.avgRating >= 4.3
-                            );
-                            setFilteredRestaurants(filteredList);
-                            //console.log(filteredList);
+
+                <div className='m-4 p-4 flex items-center'>
+                    <button 
+                        className='filter-btn px-3 py-1 m-4 bg-gray-200 rounded-lg' //OnClick takes the callback function
+                        onClick={() => {
+                                //Filter logic here
+                                //We use the hooks
+                                //Always filter from original list of restaurants
+                                const filteredList = restaurants.filter(
+                                    (item) => item.info.avgRating >= 4.3
+                                );
+                                setFilteredRestaurants(filteredList);
+                                //console.log(filteredList);
+                            }
                         }
-                    }
-                >
-                    Top Restaurants
-                </button>
+                    >
+                        Top Restaurants
+                    </button>
+                </div>
             </div>
                 
-            <div className='res-container'>
+            <div className='res-container flex flex-wrap'>
                 {/* Restro Card and we will make a seperate component for that since it will be reused many times */}
                 {
                     /*
