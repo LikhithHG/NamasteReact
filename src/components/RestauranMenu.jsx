@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 //import { MENU_API } from "../utils/constants";
 import useRestauranMenu from "../utils/useRestauranMenu";
+import RestaurnCategory from "./RestauranCategory";
+import { useState } from "react";
 
 const RestauranMenu = () => {
 
@@ -15,6 +17,8 @@ const RestauranMenu = () => {
 
     //We have to now call this from the custom Hook
     const resInfo = useRestauranMenu(resId);
+
+    const [showIndex, setShowIndex] = useState(null);
 
     /* This has now gone inside the custom hook
     useEffect(() => {
@@ -41,16 +45,36 @@ const RestauranMenu = () => {
     //The below info depends on the API so whenever API change please work on this again
     const { name, cuisines,  costForTwoMessage} = resInfo?.cards[2]?.card?.card?.info;
     
-    const { itemCards } =  resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
+    //This was used before to display
+    //const { itemCards } =  resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
     
     //To check if we are getting correct data
     //console.log(itemCards);
+    //console.log(resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards);
+
+    const categories = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+        c => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
     
-    
+    //console.log(categories);
+
     return (
-        <div className="menu">
-            <h1>{name}</h1>
-            <p>{cuisines.join(', ')} = {costForTwoMessage}</p>
+        <div className="text-center">
+            <h1 className="font-bold my-6 text-2xl">{name}</h1>
+            <p className="font-bold text-lg">{cuisines.join(', ')} = {costForTwoMessage}</p>
+            {/**categories accordian */}
+            {
+                categories.map((category, index) => (
+                    //controlled Components
+                    //if the same index is clicked again, it resets to null (closing the accordion). setShowIndex((prevIndex) => (prevIndex === index ? null : index));
+                    <RestaurnCategory 
+                        key = {category?.card?.card?.categoryId} 
+                        data = {category?.card?.card}
+                        showItems = {index === showIndex ? true : false}
+                        setShowIndex={() => setShowIndex((prevIndex) => (prevIndex === index ? null : index))}
+                    />
+            ))}
+            {/** This was used before to display
             <h2>Menu</h2>
             <ul>
                 {
@@ -61,6 +85,7 @@ const RestauranMenu = () => {
                     ))
                 }
             </ul>
+            */}
         </div>
     )
 }

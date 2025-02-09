@@ -36,4 +36,21 @@ const RestauranCard = (props) => {
     )
 }
 
+//Higher Order function for promoted label
+//Input = Restaurant card
+//Output is also a restaurant card but promoted with enhanced features
+
+export const withPromotedLabel = (RestauranCard) => {
+    //In this I have made Veg label
+    //Return a component again, component is just a function
+    return (props) => {
+        return (
+            <div>
+                <label className="absolute bg-green-500 text-white m-2 p-2 rounded-lg">Veg</label>
+                <RestauranCard {...props}/>
+            </div>
+        )
+    }
+}
+
 export default RestauranCard;

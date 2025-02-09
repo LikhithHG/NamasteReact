@@ -1,8 +1,9 @@
 //import LOGO_URL from contants.js using named import
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import {LOGO_URL} from "../utils/constants"
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
 
@@ -10,13 +11,15 @@ const Header = () => {
 
     const onlineStatus = useOnlineStatus();
 
+    const {loggedInUser} = useContext(UserContext);
+
     return(
-        <div className="flex justify-between bg-pink-100 shadow-lg m-2">
+        <div className="flex justify-between bg-white shadow-lg m-2">
             <div className='logo-container'>
                 <img className='w-24 ' src={LOGO_URL} alt='public/logo192.png' />
             </div>
-            <div className='flex items-center'>
-                <ul className="flex p-4 m-4">
+            <div className='flex items-center '>
+                <ul className="flex p-4 m-4 text-black">
                     <li className="px-4"> {/** use the key in keyboard windows + . to get emojis */}
                         Online Status: {onlineStatus ? "🟢" : "🔴"} 
                     </li>
@@ -32,7 +35,7 @@ const Header = () => {
                     <li className="px-4">
                         <Link to="/grocery">Grocery</Link>
                     </li>
-                    <li className="px-4">Cart</li>
+                    <li className="px-4 font-bold">{loggedInUser}</li>
                     <button
                         className="Login"
                         onClick={() => {

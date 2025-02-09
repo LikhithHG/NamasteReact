@@ -4,7 +4,7 @@ import UserClass from "./UserClass";
 const About = () => {
     return ( 
         <div>
-            <h1>About</h1>
+            <h1 className="">About</h1>
             <h4>I am learning the React</h4>
             <UserClass />
             {/** Needed when props are passed <UserClass name = {"Likhith (class)"} location = {"Bangalore (class)"} /> */}

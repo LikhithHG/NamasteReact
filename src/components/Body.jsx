@@ -1,4 +1,4 @@
-import RestauranCard from './RestauranCard';
+import RestauranCard, { withPromotedLabel } from './RestauranCard';
 //When using the static data this below import statement is needed
 //import resList from '../utils/mockData';
 import { useState, useEffect } from 'react'; //This is a type of hook and its a named import
@@ -28,6 +28,9 @@ const Body = () => {
 
     // Local states for search functionality and filtered results
     const [searchText, setSearchText] = useState("");
+
+    //Promoted Label card
+    const RestauranCardPromoted = withPromotedLabel(RestauranCard);
 
     useEffect(() => {
         setFilteredRestaurants(restaurants); // Set the default list for filtered restaurants
@@ -122,7 +125,7 @@ const Body = () => {
                                 //We use the hooks
                                 //Always filter from original list of restaurants
                                 const filteredList = restaurants.filter(
-                                    (item) => item.info.avgRating >= 4.3
+                                    (item) => item.info.avgRating >= 4.6
                                 );
                                 setFilteredRestaurants(filteredList);
                                 //console.log(filteredList);
@@ -152,7 +155,13 @@ const Body = () => {
                             key = {restaurant.info.id}
                             to = {"/restaurants/" + restaurant.info.id}
                         >
-                            <RestauranCard  resData = {restaurant}/>
+                            {/** If restaurant is promoted we use here the higher order component to add promoted label */
+                                restaurant.info.veg ? (
+                                    <RestauranCardPromoted resData = {restaurant} />
+                                ) : (
+                                    <RestauranCard  resData = {restaurant}/>
+                                )
+                            }
                         </Link>
                     ))
                 }
