@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import {LOGO_URL} from "../utils/constants"
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
 
@@ -12,6 +13,12 @@ const Header = () => {
     const onlineStatus = useOnlineStatus();
 
     const {loggedInUser} = useContext(UserContext);
+
+    //Selector is a Hook comes from react-redux library
+    //This hook gives access to the store - gives access to what portion of the store we need the access
+    //Subscribing to the part of the store
+    const cartItems = useSelector((store) => store.cart.items);
+    //console.log(cartItems);
 
     return(
         <div className="flex justify-between bg-white shadow-lg m-2">
@@ -34,6 +41,9 @@ const Header = () => {
                     </li>
                     <li className="px-4">
                         <Link to="/grocery">Grocery</Link>
+                    </li>
+                    <li className="px-4 font-bold">
+                        Cart - ({cartItems.length})
                     </li>
                     <li className="px-4 font-bold">{loggedInUser}</li>
                     <button
