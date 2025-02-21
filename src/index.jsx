@@ -11,6 +11,7 @@ import RestauranMenu from './components/RestauranMenu.jsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css'
 import App from './App.jsx'
+import Cart from './components/Cart.jsx';
 //This line is used to import the componets that need seperate bundling
 //It uses lazy and this takes a call back function import()
 //This import is different thing from normal imports
@@ -44,6 +45,10 @@ const appRouter = createBrowserRouter([
         //Works only if the resId is in API and it does not work for random things
         path: '/restaurants/:resId', //the path after : is dynamic and resId will be taken dynamically based on the user input
         element: <RestauranMenu />, //This resId can be accessed by useParams hook in the RestauranMenu components
+      },
+      {
+        path:'/cart',
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,

@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
-    name: "cart",
+    name: "cart",  //Name of this slice
     initialState: {
         //state of the slice
-        items: ["burger", "pizza"],
+        items: [],
     },
     //reducer funcions for each function
     reducers: {

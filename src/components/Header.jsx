@@ -18,7 +18,7 @@ const Header = () => {
     //This hook gives access to the store - gives access to what portion of the store we need the access
     //Subscribing to the part of the store
     const cartItems = useSelector((store) => store.cart.items);
-    //console.log(cartItems);
+    console.log(cartItems);
 
     return(
         <div className="flex justify-between bg-white shadow-lg m-2">
@@ -43,7 +43,7 @@ const Header = () => {
                         <Link to="/grocery">Grocery</Link>
                     </li>
                     <li className="px-4 font-bold">
-                        Cart - ({cartItems.length})
+                        <Link to="/cart">Cart - ({cartItems.length}) Items</Link>
                     </li>
                     <li className="px-4 font-bold">{loggedInUser}</li>
                     <button
