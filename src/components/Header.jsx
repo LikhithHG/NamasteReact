@@ -18,7 +18,7 @@ const Header = () => {
     //This hook gives access to the store - gives access to what portion of the store we need the access
     //Subscribing to the part of the store
     const cartItems = useSelector((store) => store.cart.items);
-    console.log(cartItems);
+    //console.log(cartItems);
 
     return(
         <div className="flex justify-between bg-white shadow-lg m-2">
