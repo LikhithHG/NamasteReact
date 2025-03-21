@@ -7,5 +7,6 @@ export default defineConfig({
   test: {
     globals: true,    // Enables global functions like `describe`, `it`, etc.
     environment: 'jsdom',  // Use jsdom for React testing
+    setupFiles: './setupTests.js', // Add this line
   },
 })
