@@ -58,3 +58,4 @@ import { expect } from "vitest";
 
 //     expect(cardsAfterFilter.length).toBe(length_you_might_get_int_value);
 // })
+//Next we will look on integration testing
