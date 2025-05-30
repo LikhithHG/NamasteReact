@@ -43,7 +43,11 @@ const RestauranCard = (props) => {
 export const withPromotedLabel = (RestauranCard) => {
     //In this I have made Veg label
     //Return a component again, component is just a function
+
+    //1st return returs a new component
     return (props) => {
+
+        //second return Returns the JSX of the original component, now wrapped
         return (
             <div>
                 <label className="absolute bg-green-500 text-white m-2 p-2 rounded-lg">Veg</label>
